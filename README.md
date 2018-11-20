@@ -51,4 +51,10 @@ For example, if you want to stop the front service, you must have:
   * Select your Restaurant
   * complete and wait for the order
 
+# NOTE
 
+In this repository you can find:
+* the swagger documentation
+* the postman json to make tests
+* the code
+* the docker files and docker compose to run the app
