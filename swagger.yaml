@@ -1,0 +1,363 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Restaurants Backend"
+  contact:
+    email: "persianahuel@gmail.com"
+host: "localhost:5000"
+basePath: "/"
+tags:
+- name: "restaurants"
+- name: "order"
+- name: "meals"
+schemes:
+- "http"
+paths:
+  /restaurants:
+    post:
+      tags:
+      - "restaurants"
+      summary: "Add a new Restaurant"
+      description: ""
+      operationId: "addRestaurant"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Basic information about the restaurant"
+        required: true
+        schema:
+          $ref: "#/definitions/Restaurant"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Rest_added"
+        400:
+          description: "Bad Request"
+    get:
+      tags:
+      - "restaurants"
+      summary: "Find restaurants by rating"
+      operationId: "findRestsByRating"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "rating"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Restaurant_short"
+        400:
+          description: "Invalid status value"
+
+  /restaurants/rating:
+    put:
+      tags:
+      - "restaurants"
+      summary: "Put a new Rating"
+      description: ""
+      operationId: "putRating"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User and rest information, and the rating"
+        required: true
+        schema:
+          $ref: "#/definitions/Rating"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Restaurant_short"
+        400:
+          description: "Bad Request"
+  /order:
+    post:
+      tags:
+      - "order"
+      summary: "Send a new order"
+      description: ""
+      operationId: "addOrder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Send a new order"
+        required: true
+        schema:
+          $ref: "#/definitions/Order"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ETA"
+        400:
+          description: "Bad Request"
+  /meals:
+    get:
+      tags:
+      - "meals"
+      summary: "Find meals by restaurant"
+      operationId: "findmealsByRestaurant"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "rest"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Meals"
+        400:
+          description: "Invalid status value"
+    post:
+      tags:
+      - "meals"
+      summary: "add a new meals"
+      description: ""
+      operationId: "addmeal"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Meal_add"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Meal_add_response"
+        400:
+          description: "Bad Request"
+
+
+  
+definitions:
+
+  Meal_add_response:
+    type: "object"
+    required: 
+    - "msg"
+    properties:
+      msg:
+        type: "string"
+        example: "Meal added"
+    xml:
+      name: "Meal_add_response"
+
+
+  Meal_add:
+    type: "object"
+    required: 
+    - "name"
+    - "price"
+    - "rest"
+    properties:
+      name:
+        type: "string"
+        example: "Meal 5"
+      price:
+        type: "integer"
+        format: "int64"
+        example: 5
+      rest:
+        type: "integer"
+        format: "int64"
+        example: 5
+    xml:
+      name: "Meal_short"
+
+
+  Meals:
+    type: "object"
+    required: 
+    - "meal"
+    - "name"
+    - "price"
+    - "rest"
+    properties:
+      meal:
+        type: "integer"
+        format: "int64"
+        example: 5
+      name:
+        type: "string"
+        example: "Meal 5"
+      price:
+        type: "integer"
+        format: "int64"
+        example: 5
+      rest:
+        type: "integer"
+        format: "int64"
+        example: 5
+    xml:
+      name: "Meals"
+
+
+
+
+
+
+
+  ETA:
+    type: "object"
+    required: 
+    - "msg"
+    properties:
+      ETA:
+        type: "string"
+        example: "1 min"
+    xml:
+      name: "ETA"
+
+
+  
+  Meal_short:
+    type: "object"
+    required: 
+    - "quantity"
+    - "meal"
+    properties:
+      quantity:
+        type: "integer"
+        format: "int64"
+        example: 5
+      meal:
+        type: "integer"
+        format: "int64"
+        example: 5
+    xml:
+      name: "Meal_short"
+  
+  Order:
+    type: "object"
+    required:
+    - "meals"
+    - "total"
+    - "addr"
+    - "latlng"
+    - "phone"
+    - "rest"
+    properties:
+      meals:
+        type: "array"
+        xml:
+          name: "Meal_short"
+        items:
+          $ref: "#/definitions/Meal_short"
+      total:
+        type: "number"
+      addr:
+        type: "string"
+      latlng:
+        type: "string"
+      phone:
+        type: "string"
+      rest:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Order"
+      
+      
+      
+  
+  Restaurant:
+    type: "object"
+    required:
+    - "name"
+    - "latlng"
+    - "email"
+    properties:
+      name:
+        type: "string"
+        example: "Pizzaria"
+      latlng:
+        type: "string"
+        example: "-34.5641679,-58.459922"
+      email:
+        type: "string"
+        example: "an-email@gmail.com"
+    xml:
+      name: "Restaurant"
+  Restaurant_short:
+    type: "object"
+    required: 
+    - "name"
+    - "image"
+    - "rating"
+    - "rest"
+    properties:
+      image:
+        type: "string"
+        example: "rest/rest008.jpg"
+      name:
+        type: "string"
+        example: "Restaurant 1"
+      rating:
+        type: "integer"
+        format: "int64"
+        example: 5
+      rest:
+        type: "integer"
+        format: "int64"
+        example: 5
+    xml:
+      name: "Restaurant_short"
+
+  Rating:
+    type: "object"
+    required:
+    - "user_id"
+    - "rest"
+    - "rating"
+    properties:
+      user_id:
+        type: "integer"
+        format: "int64"
+        example: 5
+      rest:
+        type: "integer"
+        format: "int64"
+        example: 5
+      rating:
+        type: "integer"
+        format: "int64"
+        example: 5
+    xml:
+      name: "Rating"
+  Rest_added:
+    type: "object"
+    properties:
+      msg:
+        type: "string"
+        example: "Restaurant added"

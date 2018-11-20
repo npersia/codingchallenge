@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "c9ca1915-ee54-43e0-9c5b-483c878c3916",
+		"name": "truenorth-codingchallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5001/sms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"to\":12345,\"body\":\"test\"}"
+				},
+				"url": {
+					"raw": "http://localhost:5001/sms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"sms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/restaurants",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Pizzeria\",\n\t\"latlng\": \"-34.5641679,-58.459922\",\n\t\"email\": \"persianahuel@gmail.com\"\n\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/restaurants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"restaurants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/meals",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Pizza\",\n\t\"price\": 100,\n\t\"rest\":1 \n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/meals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"meals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/meals?rest=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/meals?rest=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"meals"
+					],
+					"query": [
+						{
+							"key": "rest",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"meals\": [\n        {\n            \"quantity\": 1,\n            \"meal\": 5\n        }\n    ],\n    \"total\": 5,\n    \"addr\": \"1 1, 1, 1\",\n    \"latlng\": \"-34.5641679,-58.459922\",\n    \"phone\": \"156789\",\n    \"rest\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/restaurants?rating=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/restaurants?rating=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"restaurants"
+					],
+					"query": [
+						{
+							"key": "rating",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/restaurants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/restaurants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"restaurants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/restaurants/rating",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\": 5,\n\t\"rest\": 6,\n\t\"rating\": 5\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/restaurants/rating",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"restaurants",
+						"rating"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
