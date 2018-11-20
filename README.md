@@ -58,3 +58,4 @@ In this repository you can find:
 * the postman json to make tests
 * the code
 * the docker files and docker compose to run the app
+* the architecture document
